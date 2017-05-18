@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("BeproDB_Test")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("JsonServerTester")]
+[assembly: AssemblyDescription(" Test System for Micro Services")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("BeproDB_Test")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyProduct("JsonServerTester")]
+[assembly: AssemblyCopyright("Copyright  © Vladimir Novick  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
