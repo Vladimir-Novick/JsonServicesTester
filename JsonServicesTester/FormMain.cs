@@ -35,10 +35,11 @@ namespace BeproDB_Test
 
             string appPath = GetBaseDirectory();
 
-            openFileDialog1.InitialDirectory = selectedDirectory;
+         
+            openFileDialog1.RestoreDirectory = false;
             openFileDialog1.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
             openFileDialog1.Title = "Please select JSON file";
-            openFileDialog1.FilterIndex = 2;
+            openFileDialog1.FilterIndex = 1;
             openFileDialog1.RestoreDirectory = true;
 
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
@@ -179,6 +180,8 @@ namespace BeproDB_Test
                 request.ContentType = "application/json; charset=utf-8";
                 request.Accept = "application/json, text/javascript, */*";
                 request.Method = "POST";
+                request.Credentials = CredentialCache.DefaultNetworkCredentials;
+            
                 using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
                 {
                     writer.Write(sendParam.request);
