@@ -1,7 +1,7 @@
 [Dd]ebug/
 [Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
+source/[Rr]elease/
+source/[Rr]eleases/
 x64/
 x86/
 bld/
