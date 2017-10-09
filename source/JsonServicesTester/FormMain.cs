@@ -14,8 +14,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
-namespace BeproDB_Test
+namespace JsonServicesTester
 {
+
+
+
     public partial class FormJsonServiceTester : Form
     {
         public FormJsonServiceTester()
@@ -35,7 +38,7 @@ namespace BeproDB_Test
 
             string appPath = GetBaseDirectory();
 
-         
+
             openFileDialog1.RestoreDirectory = false;
             openFileDialog1.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
             openFileDialog1.Title = "Please select JSON file";
@@ -50,7 +53,7 @@ namespace BeproDB_Test
                     selectedDirectory = Path.GetDirectoryName(openFileDialog1.FileName);
 
 
- 
+
 
 
 
@@ -75,8 +78,8 @@ namespace BeproDB_Test
                     {
 
                         textBoxAddressLink.Text = File.ReadAllText(address);
-                     
-                     
+
+
                     }
                     textBoxResponce.Text = "";
                     tabControl.SelectedTab = tabPageReguest;
@@ -96,7 +99,7 @@ namespace BeproDB_Test
         {
             string appPath = Path.GetDirectoryName(Application.ExecutablePath);
 
-            appPath = appPath.Replace(@"\bin\Debug","") + @"\json\";
+            appPath = appPath.Replace(@"\bin\Debug", "") + @"\json\";
             return appPath;
         }
 
@@ -115,38 +118,66 @@ namespace BeproDB_Test
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            SendParams sendParam = (SendParams)(e.Result);
+          
 
             pictureBoxWait.Visible = false;
-            buttonSendRequest.Enabled = true;
-            textBoxResponce.Text = JsonPrettify(sendParam.responce);
+            buttonSendRequest.Text = "Send Request";
+            
             tabControl.SelectedTab = tabPageResponce;
             textBoxResponce.Select(0, 0);
         }
 
+
+       
         private void buttonSendRequest_Click(object sender, EventArgs e)
         {
-            try
-            {
 
-                textBoxResponce.Text = "";
-                SendParams sendParam = new SendParams()
-                {
-                    request = textBoxReguest.Text,
-                    address = textBoxBaseAddress.Text + textBoxAddressLink.Text,
-                    responce = ""
-                };
-
-                backgroundWorker1.RunWorkerAsync(sendParam);
-                pictureBoxWait.Visible = true;
-                buttonSendRequest.Enabled = false;
-            } catch ( Exception ex)
+            if (pictureBoxWait.Visible)
             {
-                pictureBoxWait.Visible = true;
-                buttonSendRequest.Enabled = false;
-                textBoxResponce.Text = ex.StackTrace;
-                tabControl.SelectedTab = tabPageResponce;
+                backgroundWorker1.CancelAsync();
+                return;
             }
+
+            int count = 0;
+
+            int.TryParse(textBoxCount.Text, out count);
+
+            if (count == 0) count = 1;
+
+            textBoxCurrent.Text = "";
+
+            SendReguests(count);
+        }
+
+        private void SendReguests(int count)
+        {
+
+
+                try
+                {
+
+                    textBoxResponce.Text = "";
+                    SendParams sendParam = new SendParams()
+                    {
+                        request = textBoxReguest.Text,
+                        address = textBoxBaseAddress.Text + textBoxAddressLink.Text,
+                        count = count,
+                        responce = ""
+                    };
+
+               
+                    backgroundWorker1.RunWorkerAsync(sendParam);
+                    pictureBoxWait.Visible = true;
+                    buttonSendRequest.Text = "Stop";
+                }
+                catch (Exception ex)
+                {
+                    pictureBoxWait.Visible = true;
+                    buttonSendRequest.Text = "Send Request";
+                    textBoxResponce.Text = ex.StackTrace;
+                    tabControl.SelectedTab = tabPageResponce;
+                }
+
         }
 
         public static string JsonPrettify(string json)
@@ -156,8 +187,9 @@ namespace BeproDB_Test
             {
                 dynamic parsedJson = JsonConvert.DeserializeObject(json);
                 return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
-     
-            } catch ( Exception ex)
+
+            }
+            catch (Exception ex)
             {
 
             }
@@ -169,51 +201,96 @@ namespace BeproDB_Test
 
 
             SendParams sendParam = (SendParams)(e.Argument);
+            string json = null ;
 
-
-            try
+            for (int j = 0; j < sendParam.count; j++)
             {
 
-
-                HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(sendParam.address);
-                request.ContinueTimeout = 88000;
-                request.ContentType = "application/json; charset=utf-8";
-                request.Accept = "application/json, text/javascript, */*";
-                request.Method = "POST";
-                request.Credentials = CredentialCache.DefaultNetworkCredentials;
-            
-                using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
+                if (backgroundWorker1.CancellationPending)
                 {
-                    writer.Write(sendParam.request);
+                    break;
                 }
 
-                WebResponse response = request.GetResponse();
-                Stream stream = response.GetResponseStream();
-                string json = "";
-
-                using (StreamReader reader = new StreamReader(stream))
+                    try
                 {
-                    while (!reader.EndOfStream)
+
+
+                    HttpWebRequest request = (HttpWebRequest)HttpWebRequest.Create(sendParam.address);
+                    request.ContinueTimeout = 88000;
+                    request.ContentType = "application/json; charset=utf-8";
+                    request.Accept = "application/json, text/javascript, */*";
+                    request.Method = "POST";
+                    request.Credentials = CredentialCache.DefaultNetworkCredentials;
+
+                    using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
                     {
-                        json += reader.ReadLine();
+                        writer.Write(sendParam.request);
                     }
+
+                    if (backgroundWorker1.CancellationPending)
+                    {
+                        break;
+                    }
+
+                    WebResponse response = request.GetResponse();
+                    Stream stream = response.GetResponseStream();
+                    json = "";
+
+                    using (StreamReader reader = new StreamReader(stream))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            json += reader.ReadLine();
+                        }
+                    }
+
+                    WorkReport report1 = new WorkReport
+                    {
+                        id = j+1,
+                        Report = json
+                    };
+
+                    backgroundWorker1.ReportProgress(j, report1);
+
+                    sendParam.responce = json;
+
+
                 }
-
-                sendParam.responce = json;
-
-
-            } catch ( Exception ex)
-            {
-                sendParam.responce = ex.Message;
+                catch (Exception ex)
+                {
+                    sendParam.responce = ex.Message;
+                }
+                backgroundWorker1.ReportProgress(j, json);
             }
 
-            e.Result = sendParam;
+            WorkReport report = new WorkReport
+            {
+                id = sendParam.count,
+                Report = json
+            };
+
+            e.Result = report;
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-           // QueryStaticTables  
+            // QueryStaticTables  
+        }
+
+        private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            if (e.UserState != null)
+            {
+                WorkReport report = e.UserState as WorkReport;
+                if (report != null)
+                {
+                    String json = JsonPrettify(report.Report);
+                    textBoxResponce.Text = JsonPrettify(json);
+                    tabControl.SelectedTab = tabPageResponce;
+                    textBoxCurrent.Text = report.id.ToString();
+                }
+            }
         }
     }
 }

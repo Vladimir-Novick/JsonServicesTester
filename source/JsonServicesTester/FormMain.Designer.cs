@@ -1,4 +1,4 @@
-﻿namespace BeproDB_Test
+﻿namespace JsonServicesTester
 {
     partial class FormJsonServiceTester
     {
@@ -40,6 +40,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxCount = new System.Windows.Forms.TextBox();
             this.textBoxBaseAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.pictureBoxWait = new System.Windows.Forms.PictureBox();
@@ -47,6 +49,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSendRequest = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.textBoxCurrent = new System.Windows.Forms.TextBox();
             this.tabControl.SuspendLayout();
             this.tabPageReguest.SuspendLayout();
             this.tabPageResponce.SuspendLayout();
@@ -87,7 +90,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(654, 316);
+            this.tabControl.Size = new System.Drawing.Size(654, 320);
             this.tabControl.TabIndex = 3;
             // 
             // tabPageReguest
@@ -96,7 +99,7 @@
             this.tabPageReguest.Location = new System.Drawing.Point(4, 22);
             this.tabPageReguest.Name = "tabPageReguest";
             this.tabPageReguest.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReguest.Size = new System.Drawing.Size(646, 290);
+            this.tabPageReguest.Size = new System.Drawing.Size(646, 294);
             this.tabPageReguest.TabIndex = 0;
             this.tabPageReguest.Text = "Reguest";
             this.tabPageReguest.UseVisualStyleBackColor = true;
@@ -109,7 +112,7 @@
             this.textBoxReguest.Multiline = true;
             this.textBoxReguest.Name = "textBoxReguest";
             this.textBoxReguest.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxReguest.Size = new System.Drawing.Size(640, 284);
+            this.textBoxReguest.Size = new System.Drawing.Size(640, 288);
             this.textBoxReguest.TabIndex = 1;
             // 
             // tabPageResponce
@@ -118,7 +121,7 @@
             this.tabPageResponce.Location = new System.Drawing.Point(4, 22);
             this.tabPageResponce.Name = "tabPageResponce";
             this.tabPageResponce.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageResponce.Size = new System.Drawing.Size(646, 290);
+            this.tabPageResponce.Size = new System.Drawing.Size(646, 294);
             this.tabPageResponce.TabIndex = 1;
             this.tabPageResponce.Text = "Response";
             this.tabPageResponce.UseVisualStyleBackColor = true;
@@ -132,7 +135,7 @@
             this.textBoxResponce.Name = "textBoxResponce";
             this.textBoxResponce.ReadOnly = true;
             this.textBoxResponce.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxResponce.Size = new System.Drawing.Size(640, 284);
+            this.textBoxResponce.Size = new System.Drawing.Size(640, 288);
             this.textBoxResponce.TabIndex = 0;
             // 
             // panel1
@@ -153,7 +156,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 43);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(654, 387);
+            this.panel2.Size = new System.Drawing.Size(654, 391);
             this.panel2.TabIndex = 5;
             // 
             // panel4
@@ -162,11 +165,14 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(654, 316);
+            this.panel4.Size = new System.Drawing.Size(654, 320);
             this.panel4.TabIndex = 5;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.textBoxCurrent);
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.textBoxCount);
             this.panel3.Controls.Add(this.textBoxBaseAddress);
             this.panel3.Controls.Add(this.label2);
             this.panel3.Controls.Add(this.pictureBoxWait);
@@ -174,10 +180,30 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonSendRequest);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 316);
+            this.panel3.Location = new System.Drawing.Point(0, 320);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(654, 71);
             this.panel3.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(12, 45);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 13);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Count";
+            // 
+            // textBoxCount
+            // 
+            this.textBoxCount.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCount.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCount.Location = new System.Drawing.Point(53, 40);
+            this.textBoxCount.Name = "textBoxCount";
+            this.textBoxCount.Size = new System.Drawing.Size(43, 23);
+            this.textBoxCount.TabIndex = 6;
             // 
             // textBoxBaseAddress
             // 
@@ -185,15 +211,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBaseAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBaseAddress.Location = new System.Drawing.Point(251, 6);
+            this.textBoxBaseAddress.Location = new System.Drawing.Point(285, 6);
             this.textBoxBaseAddress.Name = "textBoxBaseAddress";
-            this.textBoxBaseAddress.Size = new System.Drawing.Size(391, 23);
+            this.textBoxBaseAddress.Size = new System.Drawing.Size(357, 23);
             this.textBoxBaseAddress.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(173, 16);
+            this.label2.Location = new System.Drawing.Point(207, 11);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 4;
@@ -205,9 +231,9 @@
             this.pictureBoxWait.ErrorImage = null;
             this.pictureBoxWait.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxWait.Image")));
             this.pictureBoxWait.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxWait.InitialImage")));
-            this.pictureBoxWait.Location = new System.Drawing.Point(108, 6);
+            this.pictureBoxWait.Location = new System.Drawing.Point(154, 12);
             this.pictureBoxWait.Name = "pictureBoxWait";
-            this.pictureBoxWait.Size = new System.Drawing.Size(49, 48);
+            this.pictureBoxWait.Size = new System.Drawing.Size(49, 47);
             this.pictureBoxWait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWait.TabIndex = 3;
             this.pictureBoxWait.TabStop = false;
@@ -219,15 +245,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAddressLink.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAddressLink.Location = new System.Drawing.Point(251, 36);
+            this.textBoxAddressLink.Location = new System.Drawing.Point(285, 36);
             this.textBoxAddressLink.Name = "textBoxAddressLink";
-            this.textBoxAddressLink.Size = new System.Drawing.Size(391, 23);
+            this.textBoxAddressLink.Size = new System.Drawing.Size(357, 23);
             this.textBoxAddressLink.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(173, 41);
+            this.label1.Location = new System.Drawing.Point(209, 36);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 1;
@@ -235,24 +261,39 @@
             // 
             // buttonSendRequest
             // 
-            this.buttonSendRequest.Location = new System.Drawing.Point(12, 20);
+            this.buttonSendRequest.Location = new System.Drawing.Point(12, 11);
             this.buttonSendRequest.Name = "buttonSendRequest";
-            this.buttonSendRequest.Size = new System.Drawing.Size(90, 23);
+            this.buttonSendRequest.Size = new System.Drawing.Size(107, 23);
             this.buttonSendRequest.TabIndex = 0;
-            this.buttonSendRequest.Text = "SendRequest";
+            this.buttonSendRequest.Text = "Send Request";
             this.buttonSendRequest.UseVisualStyleBackColor = true;
             this.buttonSendRequest.Click += new System.EventHandler(this.buttonSendRequest_Click);
             // 
             // backgroundWorker1
             // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
+            // textBoxCurrent
+            // 
+            this.textBoxCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBoxCurrent.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxCurrent.Location = new System.Drawing.Point(105, 40);
+            this.textBoxCurrent.Name = "textBoxCurrent";
+            this.textBoxCurrent.ReadOnly = true;
+            this.textBoxCurrent.Size = new System.Drawing.Size(43, 23);
+            this.textBoxCurrent.TabIndex = 8;
             // 
             // FormJsonServiceTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(654, 430);
+            this.ClientSize = new System.Drawing.Size(654, 434);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -296,6 +337,9 @@
         private System.Windows.Forms.TextBox textBoxReguest;
         private System.Windows.Forms.TextBox textBoxBaseAddress;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox textBoxCount;
+        private System.Windows.Forms.TextBox textBoxCurrent;
     }
 }
 
