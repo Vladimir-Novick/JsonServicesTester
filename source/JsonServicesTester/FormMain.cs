@@ -67,7 +67,7 @@ namespace JsonServicesTester
                         String[] f = fName.Split('_');
                         if (f.Count() >= 2)
                         {
-                            fName = f[0] + "/" + f[1];
+                            fName = "/" + f[0] + "/" + f[1];
                         }
 
                         textBoxAddressLink.Text = fName;
