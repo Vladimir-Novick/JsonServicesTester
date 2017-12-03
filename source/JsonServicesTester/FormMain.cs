@@ -33,7 +33,7 @@ namespace JsonServicesTester
 
         private void buttonGetJsonRequest_Click(object sender, EventArgs e)
         {
-            Stream myStream = null;
+
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
 
             string appPath = GetBaseDirectory();
@@ -52,12 +52,6 @@ namespace JsonServicesTester
 
                     selectedDirectory = Path.GetDirectoryName(openFileDialog1.FileName);
 
-
-
-
-
-
-
                     textBoxJsonFileName.Text = openFileDialog1.FileName;
                     String textRequest = File.ReadAllText(openFileDialog1.FileName);
                     textRequest = textRequest.Replace("\t", "  ");
@@ -70,7 +64,12 @@ namespace JsonServicesTester
                     {
                         string fName = Path.GetFileName(textBoxJsonFileName.Text);
                         fName = fName.Substring(0, fName.Length - 5);
-                        fName = "/" + fName.Replace("_", "/");
+                        String[] f = fName.Split('_');
+                        if (f.Count() >= 2)
+                        {
+                            fName = f[0] + "/" + f[1];
+                        }
+
                         textBoxAddressLink.Text = fName;
 
                     }
@@ -118,17 +117,17 @@ namespace JsonServicesTester
 
         private void backgroundWorker1_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-          
+
 
             pictureBoxWait.Visible = false;
             buttonSendRequest.Text = "Send Request";
-            
+
             tabControl.SelectedTab = tabPageResponce;
             textBoxResponce.Select(0, 0);
         }
 
 
-       
+
         private void buttonSendRequest_Click(object sender, EventArgs e)
         {
 
@@ -153,30 +152,30 @@ namespace JsonServicesTester
         {
 
 
-                try
-                {
+            try
+            {
 
-                    textBoxResponce.Text = "";
-                    SendParams sendParam = new SendParams()
-                    {
-                        request = textBoxReguest.Text,
-                        address = textBoxBaseAddress.Text + textBoxAddressLink.Text,
-                        count = count,
-                        responce = ""
-                    };
-
-               
-                    backgroundWorker1.RunWorkerAsync(sendParam);
-                    pictureBoxWait.Visible = true;
-                    buttonSendRequest.Text = "Stop";
-                }
-                catch (Exception ex)
+                textBoxResponce.Text = "";
+                SendParams sendParam = new SendParams()
                 {
-                    pictureBoxWait.Visible = true;
-                    buttonSendRequest.Text = "Send Request";
-                    textBoxResponce.Text = ex.StackTrace;
-                    tabControl.SelectedTab = tabPageResponce;
-                }
+                    request = textBoxReguest.Text,
+                    address = textBoxBaseAddress.Text + textBoxAddressLink.Text,
+                    count = count,
+                    responce = ""
+                };
+
+
+                backgroundWorker1.RunWorkerAsync(sendParam);
+                pictureBoxWait.Visible = true;
+                buttonSendRequest.Text = "Stop";
+            }
+            catch (Exception ex)
+            {
+                pictureBoxWait.Visible = true;
+                buttonSendRequest.Text = "Send Request";
+                textBoxResponce.Text = ex.StackTrace;
+                tabControl.SelectedTab = tabPageResponce;
+            }
 
         }
 
@@ -189,7 +188,7 @@ namespace JsonServicesTester
                 return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
             }
@@ -201,7 +200,7 @@ namespace JsonServicesTester
 
 
             SendParams sendParam = (SendParams)(e.Argument);
-            string json = null ;
+            string json = null;
 
             for (int j = 0; j < sendParam.count; j++)
             {
@@ -211,7 +210,7 @@ namespace JsonServicesTester
                     break;
                 }
 
-                    try
+                try
                 {
 
 
@@ -246,7 +245,7 @@ namespace JsonServicesTester
 
                     WorkReport report1 = new WorkReport
                     {
-                        id = j+1,
+                        id = j + 1,
                         Report = json
                     };
 
@@ -290,6 +289,32 @@ namespace JsonServicesTester
                     tabControl.SelectedTab = tabPageResponce;
                     textBoxCurrent.Text = report.id.ToString();
                 }
+            }
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+            String newFileName = textBoxAddressLink.Text.Replace('/', '_') + "_V1.json";
+
+
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            string appPath = GetBaseDirectory();
+
+
+            saveFileDialog1.RestoreDirectory = true;
+            saveFileDialog1.FileName = newFileName;
+            saveFileDialog1.Filter = "json files (*.json)|*.json|All files (*.*)|*.*";
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+
+                string name = saveFileDialog1.FileName;
+
+                File.WriteAllText(name, textBoxReguest.Text);
+
+
             }
         }
     }
