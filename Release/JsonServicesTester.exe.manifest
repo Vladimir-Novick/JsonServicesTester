@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JsonServicesTester.exe" size="216520">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="JsonServicesTester.exe" size="219080">
       <assemblyIdentity name="JsonServicesTester" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>PS4bldT2YBVurXT77iIKWN2IMxVHcWHtqyJR5MtKySU=</dsig:DigestValue>
+        <dsig:DigestValue>/1zH+vorurI+FUtWwborZxnwZ+UoVrnxch3IWs/KQIo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

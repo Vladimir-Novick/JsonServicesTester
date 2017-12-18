@@ -145,7 +145,12 @@ namespace JsonServicesTester
 
             textBoxCurrent.Text = "";
 
-            SendReguests(count);
+            isBasic_Autotication = checkBoxAuthorization.Checked;
+            UserName_Authotication = textBoxUserName.Text;
+            Password_Authontification = textBoxPassword.Text;
+
+
+        SendReguests(count);
         }
 
         private void SendReguests(int count)
@@ -188,12 +193,17 @@ namespace JsonServicesTester
                 return JsonConvert.SerializeObject(parsedJson, Formatting.Indented);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                return json;
             }
             return json;
         }
+
+
+        private bool isBasic_Autotication { get; set; }
+        private string UserName_Authotication { get; set; }  
+        private string Password_Authontification { get; set;  }
 
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
@@ -201,6 +211,7 @@ namespace JsonServicesTester
 
             SendParams sendParam = (SendParams)(e.Argument);
             string json = null;
+            bool isError = false;
 
             for (int j = 0; j < sendParam.count; j++)
             {
@@ -219,7 +230,15 @@ namespace JsonServicesTester
                     request.ContentType = "application/json; charset=utf-8";
                     request.Accept = "application/json, text/javascript, */*";
                     request.Method = "POST";
-                    request.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    if (!isBasic_Autotication)
+                    {
+                        request.Credentials = CredentialCache.DefaultNetworkCredentials;
+                    } else
+                    {
+                        String encoded = System.Convert.ToBase64String(System.Text.Encoding.GetEncoding("ISO-8859-1").GetBytes(UserName_Authotication + ":" + Password_Authontification));
+                        request.Headers.Add("Authorization", "Basic " + encoded);
+                      //  request.Credentials = new NetworkCredential(UserName_Authotication, Password_Authontification);
+                    }
 
                     using (StreamWriter writer = new StreamWriter(request.GetRequestStream()))
                     {
@@ -258,17 +277,29 @@ namespace JsonServicesTester
                 catch (Exception ex)
                 {
                     sendParam.responce = ex.Message;
+                    isError = true;
+                    json = ex.Message;
                 }
                 backgroundWorker1.ReportProgress(j, json);
             }
 
-            WorkReport report = new WorkReport
-            {
-                id = sendParam.count,
-                Report = json
-            };
 
-            e.Result = report;
+            if (isError)
+            {
+                e.Result = sendParam.responce;
+            }
+            else
+            {
+
+                WorkReport report = new WorkReport
+                {
+                    id = sendParam.count,
+                    Report = json
+                };
+                e.Result = report;
+            }
+
+          
 
         }
 
@@ -286,9 +317,14 @@ namespace JsonServicesTester
                 {
                     String json = JsonPrettify(report.Report);
                     textBoxResponce.Text = JsonPrettify(json);
-                    tabControl.SelectedTab = tabPageResponce;
                     textBoxCurrent.Text = report.id.ToString();
+                } else
+                {
+                    String error = e.UserState as String;
+                    textBoxResponce.Text = error;
                 }
+                tabControl.SelectedTab = tabPageResponce;
+              
             }
         }
 
@@ -316,6 +352,15 @@ namespace JsonServicesTester
 
 
             }
+        }
+
+        private void checkBoxAuthorization_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox chk = sender as CheckBox;
+
+                textBoxUserName.Enabled = chk.Checked;
+                textBoxPassword.Enabled = chk.Checked;
+
         }
     }
 }

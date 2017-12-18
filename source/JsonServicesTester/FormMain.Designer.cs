@@ -37,6 +37,7 @@
             this.tabPageResponce = new System.Windows.Forms.TabPage();
             this.textBoxResponce = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel4 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
@@ -50,7 +51,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.buttonSendRequest = new System.Windows.Forms.Button();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.button1 = new System.Windows.Forms.Button();
+            this.checkBoxAuthorization = new System.Windows.Forms.CheckBox();
+            this.textBoxUserName = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.textBoxPassword = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.tabControl.SuspendLayout();
             this.tabPageReguest.SuspendLayout();
             this.tabPageResponce.SuspendLayout();
@@ -80,7 +85,7 @@
             this.textBoxJsonFileName.Font = new System.Drawing.Font("Verdana", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textBoxJsonFileName.Location = new System.Drawing.Point(285, 10);
             this.textBoxJsonFileName.Name = "textBoxJsonFileName";
-            this.textBoxJsonFileName.Size = new System.Drawing.Size(368, 24);
+            this.textBoxJsonFileName.Size = new System.Drawing.Size(477, 24);
             this.textBoxJsonFileName.TabIndex = 1;
             // 
             // tabControl
@@ -91,7 +96,7 @@
             this.tabControl.Location = new System.Drawing.Point(0, 0);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(677, 295);
+            this.tabControl.Size = new System.Drawing.Size(786, 300);
             this.tabControl.TabIndex = 3;
             // 
             // tabPageReguest
@@ -100,7 +105,7 @@
             this.tabPageReguest.Location = new System.Drawing.Point(4, 22);
             this.tabPageReguest.Name = "tabPageReguest";
             this.tabPageReguest.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageReguest.Size = new System.Drawing.Size(669, 269);
+            this.tabPageReguest.Size = new System.Drawing.Size(778, 274);
             this.tabPageReguest.TabIndex = 0;
             this.tabPageReguest.Text = "Reguest";
             this.tabPageReguest.UseVisualStyleBackColor = true;
@@ -113,7 +118,7 @@
             this.textBoxReguest.Multiline = true;
             this.textBoxReguest.Name = "textBoxReguest";
             this.textBoxReguest.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxReguest.Size = new System.Drawing.Size(663, 263);
+            this.textBoxReguest.Size = new System.Drawing.Size(772, 268);
             this.textBoxReguest.TabIndex = 1;
             // 
             // tabPageResponce
@@ -122,7 +127,7 @@
             this.tabPageResponce.Location = new System.Drawing.Point(4, 22);
             this.tabPageResponce.Name = "tabPageResponce";
             this.tabPageResponce.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageResponce.Size = new System.Drawing.Size(646, 294);
+            this.tabPageResponce.Size = new System.Drawing.Size(669, 269);
             this.tabPageResponce.TabIndex = 1;
             this.tabPageResponce.Text = "Response";
             this.tabPageResponce.UseVisualStyleBackColor = true;
@@ -136,7 +141,7 @@
             this.textBoxResponce.Name = "textBoxResponce";
             this.textBoxResponce.ReadOnly = true;
             this.textBoxResponce.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.textBoxResponce.Size = new System.Drawing.Size(640, 288);
+            this.textBoxResponce.Size = new System.Drawing.Size(663, 263);
             this.textBoxResponce.TabIndex = 0;
             // 
             // panel1
@@ -148,8 +153,19 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(677, 44);
+            this.panel1.Size = new System.Drawing.Size(786, 44);
             this.panel1.TabIndex = 4;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(7, 10);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(121, 23);
+            this.button1.TabIndex = 2;
+            this.button1.Text = "Save Request To File";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
             // panel2
             // 
@@ -158,7 +174,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(0, 44);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(677, 366);
+            this.panel2.Size = new System.Drawing.Size(786, 406);
             this.panel2.TabIndex = 5;
             // 
             // panel4
@@ -167,11 +183,16 @@
             this.panel4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel4.Location = new System.Drawing.Point(0, 0);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(677, 295);
+            this.panel4.Size = new System.Drawing.Size(786, 300);
             this.panel4.TabIndex = 5;
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.textBoxPassword);
+            this.panel3.Controls.Add(this.label6);
+            this.panel3.Controls.Add(this.textBoxUserName);
+            this.panel3.Controls.Add(this.label5);
+            this.panel3.Controls.Add(this.checkBoxAuthorization);
             this.panel3.Controls.Add(this.textBoxCurrent);
             this.panel3.Controls.Add(this.label3);
             this.panel3.Controls.Add(this.textBoxCount);
@@ -182,15 +203,15 @@
             this.panel3.Controls.Add(this.label1);
             this.panel3.Controls.Add(this.buttonSendRequest);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 295);
+            this.panel3.Location = new System.Drawing.Point(0, 300);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(677, 71);
+            this.panel3.Size = new System.Drawing.Size(786, 106);
             this.panel3.TabIndex = 4;
             // 
             // textBoxCurrent
             // 
             this.textBoxCurrent.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCurrent.Location = new System.Drawing.Point(156, 40);
+            this.textBoxCurrent.Location = new System.Drawing.Point(156, 75);
             this.textBoxCurrent.Name = "textBoxCurrent";
             this.textBoxCurrent.ReadOnly = true;
             this.textBoxCurrent.Size = new System.Drawing.Size(43, 23);
@@ -199,7 +220,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 45);
+            this.label3.Location = new System.Drawing.Point(12, 80);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 7;
@@ -208,7 +229,7 @@
             // textBoxCount
             // 
             this.textBoxCount.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxCount.Location = new System.Drawing.Point(107, 40);
+            this.textBoxCount.Location = new System.Drawing.Point(107, 75);
             this.textBoxCount.Name = "textBoxCount";
             this.textBoxCount.Size = new System.Drawing.Size(43, 23);
             this.textBoxCount.TabIndex = 6;
@@ -220,15 +241,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxBaseAddress.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxBaseAddress.Location = new System.Drawing.Point(322, 6);
+            this.textBoxBaseAddress.Location = new System.Drawing.Point(336, 41);
             this.textBoxBaseAddress.Name = "textBoxBaseAddress";
-            this.textBoxBaseAddress.Size = new System.Drawing.Size(343, 23);
+            this.textBoxBaseAddress.Size = new System.Drawing.Size(438, 23);
             this.textBoxBaseAddress.TabIndex = 5;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(244, 11);
+            this.label2.Location = new System.Drawing.Point(258, 46);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(72, 13);
             this.label2.TabIndex = 4;
@@ -240,9 +261,9 @@
             this.pictureBoxWait.ErrorImage = null;
             this.pictureBoxWait.Image = ((System.Drawing.Image)(resources.GetObject("pictureBoxWait.Image")));
             this.pictureBoxWait.InitialImage = ((System.Drawing.Image)(resources.GetObject("pictureBoxWait.InitialImage")));
-            this.pictureBoxWait.Location = new System.Drawing.Point(205, 16);
+            this.pictureBoxWait.Location = new System.Drawing.Point(205, 50);
             this.pictureBoxWait.Name = "pictureBoxWait";
-            this.pictureBoxWait.Size = new System.Drawing.Size(33, 38);
+            this.pictureBoxWait.Size = new System.Drawing.Size(47, 44);
             this.pictureBoxWait.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWait.TabIndex = 3;
             this.pictureBoxWait.TabStop = false;
@@ -254,15 +275,15 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.textBoxAddressLink.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBoxAddressLink.Location = new System.Drawing.Point(322, 36);
+            this.textBoxAddressLink.Location = new System.Drawing.Point(336, 71);
             this.textBoxAddressLink.Name = "textBoxAddressLink";
-            this.textBoxAddressLink.Size = new System.Drawing.Size(343, 23);
+            this.textBoxAddressLink.Size = new System.Drawing.Size(438, 23);
             this.textBoxAddressLink.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(246, 40);
+            this.label1.Location = new System.Drawing.Point(260, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 1;
@@ -270,7 +291,7 @@
             // 
             // buttonSendRequest
             // 
-            this.buttonSendRequest.Location = new System.Drawing.Point(12, 11);
+            this.buttonSendRequest.Location = new System.Drawing.Point(12, 46);
             this.buttonSendRequest.Name = "buttonSendRequest";
             this.buttonSendRequest.Size = new System.Drawing.Size(187, 23);
             this.buttonSendRequest.TabIndex = 0;
@@ -286,22 +307,59 @@
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
-            // button1
+            // checkBoxAuthorization
             // 
-            this.button1.Location = new System.Drawing.Point(7, 10);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 3, 3, 10);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(121, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save Request To File";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click_1);
+            this.checkBoxAuthorization.AutoSize = true;
+            this.checkBoxAuthorization.Location = new System.Drawing.Point(15, 11);
+            this.checkBoxAuthorization.Name = "checkBoxAuthorization";
+            this.checkBoxAuthorization.Size = new System.Drawing.Size(123, 17);
+            this.checkBoxAuthorization.TabIndex = 10;
+            this.checkBoxAuthorization.Text = "Basic Authentication";
+            this.checkBoxAuthorization.UseVisualStyleBackColor = true;
+            this.checkBoxAuthorization.CheckedChanged += new System.EventHandler(this.checkBoxAuthorization_CheckedChanged);
+            // 
+            // textBoxUserName
+            // 
+            this.textBoxUserName.Enabled = false;
+            this.textBoxUserName.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxUserName.Location = new System.Drawing.Point(205, 10);
+            this.textBoxUserName.Name = "textBoxUserName";
+            this.textBoxUserName.Size = new System.Drawing.Size(99, 23);
+            this.textBoxUserName.TabIndex = 14;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(142, 12);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(57, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "UserName";
+            // 
+            // textBoxPassword
+            // 
+            this.textBoxPassword.Enabled = false;
+            this.textBoxPassword.Font = new System.Drawing.Font("Verdana", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textBoxPassword.Location = new System.Drawing.Point(378, 10);
+            this.textBoxPassword.Name = "textBoxPassword";
+            this.textBoxPassword.PasswordChar = '*';
+            this.textBoxPassword.Size = new System.Drawing.Size(99, 23);
+            this.textBoxPassword.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(319, 15);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(53, 13);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Password";
             // 
             // FormJsonServiceTester
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(677, 410);
+            this.ClientSize = new System.Drawing.Size(786, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -349,6 +407,11 @@
         private System.Windows.Forms.TextBox textBoxCount;
         private System.Windows.Forms.TextBox textBoxCurrent;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox textBoxPassword;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox textBoxUserName;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.CheckBox checkBoxAuthorization;
     }
 }
 
